@@ -1,0 +1,325 @@
+--단일행 함수
+select employee_id, concat('김기정','바보')
+from employees;
+
+--문자열 관련 함수
+SELECT CONCAT('Oracle', 'Java Developer')
+FROM dual;
+
+select *
+from dual;
+
+desc dual;
+
+SELECT INITCAP('kim ki jung')
+FROM dual;
+
+SELECT first_name, last_name
+FROM employees
+--WHERE first_name = 'james';
+WHERE LOWER(first_name) = 'james';
+
+SELECT UPPER('bangry')
+FROM dual;
+
+SELECT LPAD('DataBase', 20, '@')
+FROM dual;
+--게시판  줄여서 보여주기
+SELECT RPAD(SUBSTR('오늘은 피곤한 월요일입니다. 그리고 띠링링합니다',1,10), 20, '.')
+FROM dual;
+
+SELECT SUBSTR('Java Developer', 6, 9)
+FROM dual;
+
+SELECT SUBSTR('서울시가산동', 4)
+FROM dual;
+
+SELECT first_name, LENGTH(first_name)
+FROM employees;
+
+SELECT REPLACE('기정바보', '바보', '최고')
+FROM dual;
+
+SELECT REPLACE('서울 시', ' ', '')
+FROM dual;
+
+SELECT INSTR('DataBase', 'B')
+FROM dual;
+
+--1은 첫번째a 2는 두번째a를 뜻함
+SELECT INSTR('DataBase', 'a', 1, 2)
+FROM dual;
+
+--SELECT LTRIM(' JavaDeveloper')
+--둘다똑같,생략가능
+--SELECT LTRIM(' JavaDeveloper', ' ')
+SELECT LTRIM('JavaDeveloper', 'Java')
+--문자도제거가능
+FROM dual;
+
+--SELECT RTRIM('JavaDeveloper ')
+--SELECT RTRIM('JavaDeveloper ', ' ')
+SELECT RTRIM('JavaDeveloper', 'Developer')
+FROM dual;
+
+SELECT TRIM(' Java Developer ')
+FROM dual;
+
+--숫자함수
+--0은 생략 가능, 첫번째,두번째 값 같음, 2는 2+1에서 반올림하라는 뜻, -1은 소수점기준으로 앞으로감, 즉 5에서 반올림함
+SELECT ROUND(45.923), ROUND(45.923, 0), ROUND(45.923, 2), ROUND(45.923, -1)
+FROM dual;
+
+--무조건 내림
+SELECT TRUNC(45.923), TRUNC(45.923, 0), TRUNC(45.923, 2), TRUNC(45.923, -1)
+FROM dual;
+
+SELECT CEIL(123.123)
+FROM dual;
+
+SELECT FLOOR(123.123)
+FROM dual;
+
+SELECT ABS(-500)
+FROM dual;
+
+SELECT POWER(5, 2), SQRT(5), SIN(30), COS(30), TAN(30)
+FROM dual;
+
+-- 최소값 반환
+SELECT LEAST(10, 20, 30, 40)
+FROM dual;
+
+-- 최대값 반환
+SELECT GREATEST(10, 20, 30, 40)
+FROM dual;
+
+--날짜함수
+--오늘날짜
+SELECT SYSDATE
+FROM dual;
+
+-- DATE 타입에 연산 가능
+SELECT SYSDATE - 1 "어제" , SYSDATE "오늘", SYSDATE + 1 "내일"
+FROM dual;
+
+-- 사원별 근무 일수 검색
+SELECT first_name, hire_date, SYSDATE, CEIL(SYSDATE - hire_date) "근무일수"
+FROM employees;
+
+-- 사원별 근무 개월수 검색
+--trunc 안쓰면 소수점으로 떨어짐
+SELECT first_name, TRUNC(MONTHS_BETWEEN(SYSDATE, hire_date)) "근무개월수"
+FROM employees;
+
+-- 특정개월수를 더한 날짜 반환
+--오늘날짜에서 2개월 후 날짜 계산해줌
+SELECT SYSDATE, ADD_MONTHS(SYSDATE, 2) "오늘부터 2개월 후"
+FROM dual;
+
+-- 이번주 토요일 날짜
+--요일이 숫자로 등록되어있음 1(일) ~ 7(토)
+SELECT SYSDATE "오늘", NEXT_DAY(SYSDATE, 7) "이번주 토요일"
+FROM dual;
+
+-- 이번달 마지막 날짜
+SELECT SYSDATE, LAST_DAY(SYSDATE) "이번달 마지막날"
+FROM dual;
+
+--형변환 함수
+SELECT TO_CHAR(12345), TO_CHAR(12345.67)
+FROM dual;
+--9는 빈 공백으로 채움, 알아서 반올림
+SELECT TO_CHAR(12345, '999,999'), TO_CHAR(12345.677, '999,999.99')
+FROM dual;
+--0은 0으로 채움
+SELECT TO_CHAR(12345, '000,000'), TO_CHAR(12345.677, '000,000.00')
+FROM dual;
+
+SELECT TO_CHAR(150, '$9999'), TO_CHAR(150, '$0000')
+FROM dual;
+
+SELECT TO_CHAR(150, 'S9999'), TO_CHAR(150, 'S0000')
+FROM dual;
+
+SELECT TO_CHAR(150, '9999MI'), TO_CHAR(-150, '9999MI')
+FROM dual;
+
+--EEEE은 지수,RM은 로마자
+SELECT TO_CHAR(150, '9999EEEE'), TO_CHAR(150, 'RM')
+FROM dual;
+
+SELECT TO_CHAR(150, 'RN'), TO_CHAR(150, 'rn')
+FROM dual;
+
+SELECT TO_CHAR(10, 'X'), TO_CHAR(10, 'x'), TO_CHAR(15, 'X')
+FROM dual;
+
+--기본타입
+SELECT TO_CHAR(SYSDATE)
+FROM dual;
+
+--원하는타입지정
+SELECT TO_CHAR(SYSDATE, 'YYYY-MM-DD AM HH:MI:SS DAY')
+FROM dual;
+
+SELECT first_name, hire_date, TO_CHAR(hire_date, 'YYYY-MM-DD HH24:MI')
+FROM employees;
+
+-- 입사년도가 2002년도인 사원들
+--기존에 배웠던 범위로 비교하는것 보다 문자열끼리 비교하는게 더 좋다, 연산도 빠름
+SELECT first_name, hire_date
+FROM employees
+WHERE TO_CHAR(hire_date, 'YYYY') = '2002';
+
+--년도 상관없이 3월에 입사한 사람들 다 가져옴, TO_CHAR은 자바의 Strinf valueOf()랑 비슷함. 중요하니까 꼭 알아두자
+SELECT first_name, hire_date
+FROM employees
+WHERE TO_CHAR(hire_date, 'MM') = '03';
+
+--문자열 12345가 숫자로 바뀜 parseINT 생각하면됨 결과는 1 더한 12346값 변환
+SELECT TO_NUMBER('12345') + 1
+FROM dual;
+
+--자바처럼 자동형변환 되는데 자바랑 다르게 숫자로 형변환 됨 웬만하면 to_number쓰자
+SELECT '12345' + 1
+FROM dual;
+
+SELECT TO_NUMBER('12,345', '00,000') + 1
+FROM dual;
+
+SELECT TO_NUMBER('1000') + TO_NUMBER('2,000', '0,000') + 1
+FROM dual;
+
+--날짜로
+SELECT TO_DATE('2021/12/31 18:45:23', 'YYYY/MM/DD HH24:MI:SS')
+FROM dual;
+
+SELECT first_name, hire_date
+FROM employees
+WHERE hire_date = TO_DATE('2003-06-17', 'YYYY-MM-DD');
+--둘다 똑같음,둘중에 편한거 쓰면됨 ,TO_CHAR많이쓰니까 알아두기
+SELECT first_name, hire_date
+FROM employees
+WHERE To_CHAR(hire_date, 'YYYY-MM-DD') ='2003-06-17';
+
+SELECT first_name, hire_date
+FROM employees
+WHERE hire_date = TO_DATE(20030617, 'YYYY-MM-DD');
+
+--null일때 10으로 변환하라
+SELECT NVL(NULL, 10) FROM dual;
+
+-- 10*null=null,그래서 10에다 null 곱해질때 1이 곱해지도록 설정
+SELECT 10*NULL, 10*NVL(NULL, 1)
+FROM dual;
+
+--null로 표현되는거 보다 0으로 표현해주기
+SELECT first_name, salary, NVL(commission_pct, 0)
+FROM employees;
+
+SELECT first_name, salary, commission_pct, ( salary + ( salary * commission_pct ) ) * 12 "연봉"
+FROM employees;
+
+--null은 아무것도 없다는 뜻이지만 값을 담고있기때문에 NVL활용하는거
+SELECT first_name, salary, commission_pct, ( salary + ( salary * NVL(commission_pct, 0) ) ) * 12 "연봉"
+FROM employees;
+
+--조건 삼항연산자랑 비슷 null이 아니면 값나오고, 아니면 0으로, 가독성을 위해서 이렇게 써주는게 좋음
+SELECT first_name, 
+        salary, 
+        NVL2(commission_pct, commission_pct, 0)
+FROM employees;
+
+--'신입사원' 대신에 0으로 숫자로도 가능
+SELECT first_name, salary, 
+    NVL2(TO_CHAR(commission_pct), 
+         TO_CHAR(commission_pct), '신입사원') "인센티브"
+FROM employees;
+
+--swtch문이랑 비슷함
+SELECT first_name, job_id,DECODE(job_id,'IT_PROG', '개발자',
+                                        'AC_MRG', '관리자',
+                                        'FI_ACCOUNT', '회계사',
+                                        '직원')
+
+FROM employees;
+
+SELECT first_name, job_id, salary,
+
+--회사 직종별 급여 인상
+DECODE(job_id, 'IT_PROG', salary * 1.5,
+                'AC_MRG', salary * 1.3,
+                'AC_ASST', salary * 1.1,
+                salary) "인상급여"
+FROM employees;
+
+-- 전체 사원수(NULL은 포함 안됨), null은 갯수에 포함 안됨
+SELECT COUNT(employee_id) FROM employees;
+
+-- 전체 사원수(NULL 포함), 전체 조회할때는 와일드카드* 써주는게 좋음
+SELECT COUNT(*) FROM employees;
+
+-- 커미션 받는 사원의 수
+SELECT COUNT(commission_pct)
+FROM employees;
+
+SELECT COUNT(*) "전체사원수", COUNT(commission_pct) "커미션사원수"
+FROM employees;
+
+-- 급여 총액(NULL은 무시)
+SELECT SUM(salary)
+FROM employees;
+
+-- 급여 평균(NULL은 무시)
+SELECT AVG(salary)
+FROM employees;
+
+-- 커미션 평균
+--107명중에 35명안에서만 평균을 구한것, 즉 잘못됨,null값을 0으로 표시해줘야함(107명의 평균값), NVL 중요하니까 잘 알아두자
+SELECT AVG(commission_pct), AVG(NVL(commission_pct, 0))
+FROM employees;
+
+-- 최대값, 최소값
+--최솟값은 null이기때문에 NVL 넣어줘야함
+SELECT MAX(salary), MIN(salary), MAX(commission_pct), MIN(NVL(commission_pct, 0))
+FROM employees;
+
+SELECT MAX(hire_date), MIN(hire_date), MAX(hire_date) - MIN(hire_date) "짬밥차"
+FROM employees;
+-- GROUP BY 절(특정 컬럼을 기준으로 그룹핑)
+SELECT department_id
+FROM employees
+GROUP BY department_id;
+
+-- 부서별 급여총액, 평균
+SELECT department_id, SUM(salary), AVG(salary)
+FROM employees
+GROUP BY department_id;
+
+-- HAVING 절(그룹에 대한 조건)
+SELECT department_id, SUM(salary) "SUM", AVG(salary) "AVG" 
+FROM employees
+GROUP BY department_id
+HAVING department_id IS NOT NULL
+--HAVING department_id = 10;
+--ORDER BY department_id;
+--ORDER BY SUM;
+ORDER BY AVG;
+ 
+--실행순서 때문에 HAVING절에 별칭 못씀 
+SELECT department_id, SUM(salary) SUM, AVG(salary) AVG
+FROM employees
+GROUP BY department_id
+HAVING AVG(salary) >= 3000;
+
+SELECT department_id, MAX(salary), MIN(salary)
+FROM employees
+GROUP BY department_id
+HAVING MAX(salary) > 20000;
+
+SELECT hire_date, COUNT(*)
+FROM employees
+GROUP BY hire_date
+ORDER BY hire_date;
+--ORDER BY COUNT(*);

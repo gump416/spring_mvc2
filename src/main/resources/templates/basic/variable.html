@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+  <h1>컨텐츠에 객체 출력하기</h1>
+  <div th:text="${member.name}">이름</div>
+  <div th:text="${member['name']}">이름</div>
+  <div th:text="${member.getName()}">이름</div> <!-- /*권장사항은 아님*/ -->
+  <div th:text="${member.age}">나이</div>
+
+  <h1>컨텐츠에 리스트 출력하기</h1>
+  <div th:text="${list[0].name}">이름</div>
+  <div th:text="${list[1].age}">나이</div>
+
+  <h1>컨텐츠에 맵 출력하기</h1>
+  <div th:text="${map['member1'].name}">이름</div>
+  <div th:text="${map['member2'].age}">나이</div>
+
+  <!-- /* 지역변수 사용 */ -->
+  <h1>지역변수 사용</h1>
+  <div th:with="member=${list[0]}"> <!--/* <c:out var="">는 var의 값이 pagescope에 저장되는데 이런 역할을 함*/ -->
+    <span th:text="${member.name}">이름</span> <!-- /*위에 선언한 member에 접근가능, 여러번 접근할때 위에처럼 선언해둠*/ -->
+  </div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+  <h1>타임리프 디폴트 객체들</h1>
+  <div th:text="${#request.method}">request</div>
+  <div th:text="${#request.getMethod()}">request</div>
+  <div th:text="${#response}">response</div>
+  <div th:text="${#session}">session</div>
+  <div th:text="${#servletContext}">session</div>
+  <div th:text="${#locale}">session</div>
+
+  <h1>타임리프 편의 객체들</h1>
+  <div th:text="${#request.getParameter('name')}">param</div>
+  <div th:text="${param.name}">param</div>
+  <div th:text="${session.loginId}">session</div> <!-- /*이때말하는 session은  session scope를 말함 */ -->
+  <div th:text="${@helloBean.hello('김기정')}">메시지</div>
+</body>
+</html>
+
+
+
+

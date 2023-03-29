@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+  <h1>if, unless</h1>
+  <table border="1">
+    <tr>
+      <th>이름</th>
+      <th>나이</th>
+      <th>성인여부</th>
+    </tr>
+    <tr th:each="member, memberStat : ${members}">
+      <td th:text="${member.name}">이름</td>
+      <td><span th:text="${member.age}">0</span></td>
+      <td><span th:text="'미성년자'" th:if="${member.age < 20}"></span> <!-- /* 조건만족하면 span전체 출력 */ -->
+        <span th:text="'미성년자'" th:unless="${member.age >= 20}"></span></td>
+    </tr>
+  </table>
+  
+  <h1>switch~case</h1>
+  
+  <p th:switch="${score/10}">
+    <span th:case="10">수</span>
+    <span th:case="9">수</span>
+    <span th:case="8">우</span>
+    <span th:case="7">미</span>
+    <span th:case="6">양</span>
+    <span th:case="*">공부좀 열심히 혀라~~</span>
+  </p>
+  
+  <table border="1">
+    <tr>
+      <th>순번</th>
+      <th>이름</th>
+      <th>나이</th>
+    </tr>
+    <tr th:each="member, memberStat : ${members}">
+      <td th:text="${memberStat.count}">1</td>
+      <td th:text="${member.name}">이름</td>
+      <td th:switch="${member.age}">
+        <span th:case="10">10살</span>
+        <span th:case="20">20살</span> 
+        <span th:case="*">기타</span>
+      </td>
+    </tr>
+  </table>
+  
+  
+</body>
+</html>
+
+
+
+

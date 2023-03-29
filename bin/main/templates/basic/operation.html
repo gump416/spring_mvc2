@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+  <h1>연산자</h1>
+  <ul>
+    <li>산술 연산
+      <ul>
+        <li><span th:text="10 + 2"></span></li>
+        <li><span th:text="'10' + 2"></span></li>
+        <li><span th:text="10 % 2 == 0"></span></li>
+      </ul>
+    </li>
+    <li>비교 연산
+      <ul>
+        <li><span th:text="1 &gt; 10"></span></li>
+        <li><span th:text="1 gt 10"></span></li>
+        <li><span th:text="1 >= 10"></span></li>
+        <li><span th:text="1 ge 10"></span></li>
+        <li><span th:text="1 == 10"></span></li>
+        <li><span th:text="1 != 10"></span></li>
+      </ul>
+    </li>
+    <li>조건식 삼항식
+      <ul>
+        <li><span th:text="(10 % 2 == 0) ? '짝수' : '홀수'"></span></li>
+      </ul>
+    </li>
+    <li>Elvis 연산자
+      <ul>
+        <li><span th:text="${message} ?: '메시지가 존재하지 않습니다.'"></span></li>
+        <li><span th:text="${message2} ?: '메시지가 존재하지 않습니다.'"></span></li>
+      </ul>
+    </li>
+    <li>No-Operation
+      <ul>
+        <li><span th:text="${name} ?: _">손님</span></li>
+      </ul>
+    </li>
+  </ul>
+</body>
+</html>
+
+
+
+

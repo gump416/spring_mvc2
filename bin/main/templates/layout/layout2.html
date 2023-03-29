@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, links, content)" >
+<head>
+  <title th:replace="${title}">레이아웃 타이틀</title> <!-- /* <title>회원가입 화면</title>이걸로 대체됨 */ -->
+  <!-- 공통 사용 CSS, JavaScript -->
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/some.css}">
+  <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+  <script th:src="@{/js/some.js}"></script>
+  <!--추가 -->
+  <th:block th:replace="${links}" />
+</head>
+<body>
+  <header>상단메뉴...</header>
+  <hr>  
+  <h1>전체 페이지의 공통 레이아웃</h1>
+  <hr>  
+  <div th:replace="${content}">
+    <p>레이아웃 컨텐츠</p>
+  </div>
+  <hr>  
+  <footer> 레이아웃 푸터 </footer>
+</body>
+</html>
+

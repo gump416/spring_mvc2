@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+  <h1>속성 설정</h1>
+  <input type="text" name="mock" th:name="김기정" />
+  
+  <h1>속성 추가</h1>
+  <input type="text" class="text" th:attrappend="class=' large'"><!-- /* class에만 적용되는건 아님 */ -->
+  <br>
+  <input type="text" class="text" th:attrprepend="class='large-'">
+  <br>
+  <input type="text" class="text" th:classappend="large"> <!-- /*class에만..*/ -->
+  <br>
+
+  <h1>checked 처리</h1>
+  <input type="checkbox" name="active" checked> <!-- /*기존방식*/ -->
+  <input type="checkbox" name="active" th:checked="true"> <!-- /*유연하게 동적으로 설정 true면 checked*/ -->
+  <input type="checkbox" name="active" th:checked="${false}"> 
+</body>
+
+</html>
+
+
+
+

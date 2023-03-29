@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+  <h1 th:text="${message}">기본 내용</h1>
+  <!--/* 에러 
+  <div th:text="Hello Spring">기본 내용</div>
+  */--> <!-- /* 공백이 있을때는 꼭 ''로 감싸줘야함 */ -->
+  <div th:text="'Hello Spring MVC'">기본 내용</div>
+  <div th:text="'Hello' + ${message}">기본 내용</div>
+  <!-- 리터럴 대체 : 자바스크립트 템플릿 스트링 -->
+  <div th:text="|Hello ${message}|">기본 내용</div> <!-- /* 백틱(``)을 타임리프에서는 ||이걸로씀 */ -->
+</body>
+
+</html>
+
+
+
+

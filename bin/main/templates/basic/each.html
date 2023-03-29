@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+  <h1>기본 테이블</h1>
+  <table border="1">
+    <tr>
+      <th>아이디</th>
+      <th>비밀번호</th>
+      <th>이름</th>
+      <th>나이</th>
+    </tr>
+    <tr th:each="member : ${members}"> <!-- /* 확장for문 비슷 ${members}안에 들어있는 수만큼 생김 */ -->
+      <td th:text="${member.id}">아이디</td>
+      <td th:text="${member.password}">비밀번호</td>
+      <td th:text="${member.name}">이름</td>
+      <td th:text="${member.age}">0</td>
+    </tr>
+  </table>
+  
+  <!-- 선택변수 사용 -->
+  <table border="1">
+    <tr>
+      <th>아이디</th>
+      <th>비밀번호</th>
+      <th>이름</th>
+      <th>나이</th>
+    </tr>
+    <tr th:each="member : ${members}" th:object="${member}"> <!-- /* 자바의 static import같은 개념 꼭 안써도됨 */ -->
+      <td th:text="*{id}">아이디</td>
+      <td th:text="*{password}">비밀번호</td>
+      <td th:text="*{name}">이름</td>
+      <td th:text="*{age}">0</td>
+    </tr>
+  </table>
+
+  <h1>반복 상태 확인</h1>
+  <table border="1">
+    <tr>
+      <th>count</th>
+      <th>이름</th>
+      <th>나이</th>
+      <th>기타상태정보들</th>
+    </tr>
+    <tr th:each="member, loopStat : ${members}"> <!-- /* 상태값 loopStat 생략하면 memberStat가 자동으로 붙어서 memberStat.count식으로 접근*/ -->
+                                                 <!-- /* even은 홀수,짝수 boolean값으로 반환*/ -->   
+      <td th:text="${loopStat.count}">번호</td>
+      <td th:text="${member.name}">이름</td>
+      <td th:text="${member.age}">0</td>
+      <td><span th:text="${loopStat.index}"></span> <span
+        th:text="${loopStat.size}"></span> <span
+        th:text="${loopStat.even}"></span> <span  
+        th:text="${loopStat.odd}"></span> <span
+        th:text="${loopStat.first}"></span> <span
+        th:text="${loopStat.last}"></span> <span
+        th:text="${loopStat.current}"></span></td>
+    </tr>
+  </table>
+  
+  <span th:each="i : ${#numbers.sequence(1, 10)}">
+  [[${i}]]
+  </span>
+  
+</body>
+</html>
+
+
+
+

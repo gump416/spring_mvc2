@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!--/*xml namespace에 th(thymeleaf의 약자)라는 이름으로 설정, 타임리프엔진에 전달+jstl선언까지 동시에함*/  -->
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+  <h2>Spring MVC에서 Thymeleaf 사용하기</h2>
+  <p th:text="${message1}">템플릿 문장</p> <!-- /*el문처럼쓰기위해 text라는 속성을 이용해서 안에 내용대체할수있음 그때 th라는 접두어 꼭 써줘야함, hello.html을 브라우저로 실행하면 템플릿 문장 출력됨 */-->
+  <!-- /* 이스케이프 처리 O */ -->
+  <p th:text="${message2}">템플릿 문장</p> <!-- /*그래서 디자이너랑 협업할때 좋음, 정적인내용 그대로유지하면서 서버로 돌리면 동적인 내용까지 두가지 내용 출력가능*/ -->
+                                           <!--/* jstl에 out태그가 text로 바뀌었다 생각하기, <strong>의 꺽새가 이스케이프 처리됨, el이랑 비슷하지만 text는 태그안에 속성으로만 써야함 */--> 
+  <!-- /* 이스케이프 처리 X */ -->
+  <p th:utext="${message2}">템플릿 문장</p> <!-- /*이스케이프처리 안되서 <strong>처리되서 출력됨*/ -->
+  
+  <!-- /* 이스케이프 처리 O */ -->
+  <p>[[${message2}]]</p> <!--/*텍스트안에 직접 내용을 덮어쓰고싶을때는 [[ ]] 대괄호 두개안에 ${}을 쓰면된다 */-->
+  <!-- /* 이스케이프 처리 X */ -->
+  <p>[(${message2})]</p> <!--/* [()] */-->
+</body>
+</html>

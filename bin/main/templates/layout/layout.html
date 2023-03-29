@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="common_header(title,links)">
+  <meta charset="utf-8">
+  <title th:replace="${title}">레이아웃 타이틀</title>
+  <!-- 공통 사용 CSS, JavaScript -->
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/some.css}">
+  <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+  <script th:src="@{/js/some.js}"></script>
+  <!--추가 -->
+  <th:block th:replace="${links}" />
+</head>
+
+<body>
+기본 레이아웃 페이지..   
+</body>
+</html>

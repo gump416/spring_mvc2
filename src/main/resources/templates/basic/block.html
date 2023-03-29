@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>타임리프 사용</title>
+</head>
+<body>
+  <h2>타임리프의 유일한 태그</h2>
+  <th:block th:each="member : ${members}"> <!-- /* 여러개 루프 돌릴때 다른것들은 다 속성인데 유일한 th태그!!!!!!!!!!!!!!!!*/ -->
+    <h2 th:text="${member.name}">이름</h2>
+    <p th:text="${member.age}"></p>
+  </th:block>
+  
+  <th:block th:if="${true}">
+    <div><span>김기정</span></div>
+  </th:block>
+</body>
+</html>
+

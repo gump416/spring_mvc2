@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/layout2 :: layout(~{::title}, ~{::link}, ~{::section})}">
+
+<head>
+  <title>회원가입 화면</title> <!-- /* {::title}에 title 넘겨라*/ -->
+  <!-- 현재 페이지에 추가적인 css 파일 포함 -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"> <!-- /* {::link}에 link 넘겨라*/ -->
+  <link rel="stylesheet" th:href="@{/themes/smoothness/jquery-ui.css}"> <!-- /* {::link}에 link 넘겨라*/ -->
+</head>
+
+<body>
+  <section>
+    <p>회원 가입하기</p>
+    <input type="text" name="id">
+    <div>회원 가입하세요...</div>
+  </section>
+</body>
+
+</html>
