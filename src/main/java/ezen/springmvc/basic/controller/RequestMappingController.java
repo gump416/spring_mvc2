@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
+@RestController //Rest가 붙어있으면 논리적 view이름이아닌 return에 입력해준 값이 그대로 브라우저에 출력됨
 // 응답메시지 바디에 바로 출력(API 서비스시 사용)
 // Postman 요청 테스트
 @Slf4j 
@@ -57,7 +57,7 @@ public class RequestMappingController {
 	 * @PathVariable("userId") String userId -> @PathVariable userId
 	 */
 	@GetMapping("/mapping/{userId}")
-	// public String mappingPath(@PathVariable("userId") String id) {
+	// public String mappingPath(@PathVariable("userId") String id) {  //매개변수이름과 템플릿변수 이름이 다를때 @PathVariable("userId") 이거써주는데 굳이 다르게 설정안함
 	public String mappingPath(@PathVariable String userId) {
 		log.info("mappingPath userId={}", userId);
 		return "ok";

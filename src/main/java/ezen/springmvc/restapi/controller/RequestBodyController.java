@@ -38,7 +38,7 @@ public class RequestBodyController {
 	
 	@PostMapping("/request-body")
 	public HttpEntity<String> processRequestBody(HttpEntity<String> httpEntity){
-		String message = httpEntity.getBody();
+		String message = httpEntity.getBody(); //위에 주석처리한 작업을 더 쉽게 해줌
 		log.info("요청메시지 바디 : {}", message);
 		return new HttpEntity<String>("반갑습니다. 클라이언트...");
 	}
@@ -47,12 +47,15 @@ public class RequestBodyController {
 	public ResponseEntity<String> processRequestBody(RequestEntity<String> httpEntity){
 		String message = httpEntity.getBody();
 		log.info("요청메시지 바디 : {}", message);
-		return new ResponseEntity<String>("반갑습니다. 클라이언트...", HttpStatus.OK);//200
+//		return new ResponseEntity<String>("반갑습니다. 클라이언트...", HttpStatus.CREATED);//201
+		return new ResponseEntity<String>("반갑습니다. 클라이언트...", HttpStatus.OK);//200 //위에꺼랑 다르게 ok 같은 추가적인 정보 입력가능
 	}
 	
 	@PostMapping("/request-body3")
-	@ResponseBody
+	@ResponseBody //응답도 어노테이션으로...
 	public String processRequestBody(@RequestBody String bodyMessage){
+		//string타입으로 body메세지 인자로 넣어주면됨, 더 간단, 응답메세지 추가적으로 보내고싶을때는 body2방법써도됨,
+		//근데 바디에 응답메세지 포함 가능이라 굳이 body2방법 안씀
 		log.info("요청메시지 바디 : {}", bodyMessage);
 		return "반갑습니다. 클라이언트님...";
 	}

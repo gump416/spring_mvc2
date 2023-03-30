@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import ezen.springmvc.basic.dto.Member;
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
+@RestController //브라우저에 메세지 그대로 보여주고싶을때, controller는controllerScan대상
 @Slf4j
 public class RequestParamController {
 	
 	// 파라미터 조건 매핑
 	@RequestMapping(value="/param-condition", method=RequestMethod.GET, params="admin=bangry")
 	public String paramCondition(){
-	    return "ok";
+	    return "ok"; //브라우저에 ok 그대로 출력됨
 	}
 
 	@RequestMapping("/request-param")
@@ -32,7 +32,7 @@ public class RequestParamController {
 	}
 	
 	@RequestMapping("/model-attribute1")
-	public String modelAttributeV1(@ModelAttribute Member member) {
+	public String modelAttributeV1(@ModelAttribute Member member) { //@ModelAttribute 생략가능,비권장, 헷갈릴수있음
 		log.info("name={}, age={}", member.getName(), member.getAge());
 		return "ok";
 	}
@@ -45,8 +45,9 @@ public class RequestParamController {
 	 * 나머지 = @ModelAttribute 적용
 	 */
 	@RequestMapping("/model-attribute2")
-	public String modelAttributeV2(@ModelAttribute Member member) {
+	public String modelAttributeV2(@ModelAttribute Member member) {  //@RequestParam int name 
 		log.info("name={}, age={}", member.getName(), member.getAge());
+		//@ModelAttribute은 model.addAtribute("member", member); 이거까지해줌
 		return "ok";
 	}
 }

@@ -9,9 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
+@Slf4j //lombok 어노테이션
 public class LogTestController { 
-	
+	//rombok이 자동으로 추가해준다
 	//private Logger log = LoggerFactory.getLogger(getClass());
 	//private Logger log = LoggerFactory.getLogger(LogTestController.class);
 	
@@ -33,7 +33,7 @@ public class LogTestController {
 		// 주의사항
 		// 로그레벨이 info로 설정되어 있는 경우 trace는 출력되지 않지만 '+' 연산자는 수행된다(CPU, 메모리 사용)
 		// 성능 저하 요인
-		log.trace("name = " + name);
+		log.trace("name = " + name);//+쓰지말고 위에처럼 치환하는 방식으로 써야함, 연산자는 무조건 수행되기때문에 메모리 낭비!!!!!!!!!!
 		
 		return new ModelAndView("log-test");
 	}
