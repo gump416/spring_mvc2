@@ -32,7 +32,7 @@ public class RequestJsonController {
 	
 	@PostMapping("/request-json2")
 	@ResponseBody  //1.주고받고자하는 데이터만 선언해주면  
-	public Member processJson2(@RequestBody Member member){ //2.Member ->json,
+	public Member processJson2(@RequestBody Member member){ //2.Member ->json
 		log.info("회원 객체 : {}", member);
 		return member; //3.json ->Member 작업 다해줌
 	}

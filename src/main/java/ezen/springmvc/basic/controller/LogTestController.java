@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j //lombok 어노테이션
+@Slf4j //lombok라이브러리 기반 logging 어노테이션
 public class LogTestController { 
 	//rombok이 자동으로 추가해준다
 	//private Logger log = LoggerFactory.getLogger(getClass());
