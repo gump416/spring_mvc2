@@ -11,7 +11,7 @@
     <p th:text="${member.age}"></p>
   </th:block>
   
-  <th:block th:if="${true}">
+  <th:block th:if="${true}"> <!-- /*false면 화면에 값 안나옴 */ -->
     <div><span>김기정</span></div>
   </th:block>
 </body>

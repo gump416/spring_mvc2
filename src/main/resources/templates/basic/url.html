@@ -9,13 +9,9 @@
   <ul>
     <li><a th:href="@{/thymeleaf/hello}">단순 url</a></li> <!-- /*th가 없으면 그냥 정적으로 href로 동작함 */ -->
     <li><a href="https://thymeleaf/hello" th:href="@{/thymeleaf/hello}">단순 url</a></li> <!-- /* 정적인갑 동적인값 둘다 설정해주는게 좋음 */ -->
-    <li><a th:href="@{/thymeleaf/hello(param1=${param1}, param2=${param2})}">query
-        param</a></li>
-    <li><a th:href="@{/thymeleaf/hello/{param1}/{param2}(param1=${param1}, param2=${param2})}">path
-        variable</a></li>
-    <li><a
-      th:href="@{/thymeleaf/hello/{param1}(param1=${param1}, param2=${param2})}">path
-        variable + query string</a></li>
+    <li><a th:href="@{/thymeleaf/hello(param1=${param1}, param2=${param2})}">query param</a></li>
+    <li><a th:href="@{/thymeleaf/hello/{param1}/{param2}(param1=${param1}, param2=${param2})}">path variable</a></li>
+    <li><a th:href="@{/thymeleaf/hello/{param1}(param1=${param1}, param2=${param2})}">path variable + query string</a></li>
   </ul>
 </body>
 

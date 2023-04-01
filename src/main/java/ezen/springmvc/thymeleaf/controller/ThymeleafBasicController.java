@@ -20,7 +20,7 @@ import ezen.springmvc.basic.dto.Member;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
+@Slf4j 
 @RequestMapping("/thymeleaf")
 public class ThymeleafBasicController {
 
