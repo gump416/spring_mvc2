@@ -79,11 +79,12 @@ public class FileUploadDownloadController {
 	@GetMapping("/download/{fileName}")
 	public ResponseEntity<Resource> download(@PathVariable String fileName) throws IOException {
 		Path path = Paths.get(location + "/" + fileName);
-		String contentType = Files.probeContentType(path);
+		String contentType = Files.probeContentType(path); //Files.probeContentType() 메서드는 파일의 MIME 유형을 결정합니다
 		HttpHeaders headers = new HttpHeaders();
 		// 응답 헤더에 파일정보 설정
 		headers.setContentDisposition(
 				ContentDisposition.builder("attachment").filename(fileName, StandardCharsets.UTF_8).build());
+		//builder는 헤더를 생성하는 빌더 객체를 생성, build는 빌더 객체를 사용하여 Content-Disposition 헤더 객체를 생성
 		headers.add(HttpHeaders.CONTENT_TYPE, contentType);
 		Resource resource = new InputStreamResource(Files.newInputStream(path));
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
@@ -94,8 +95,8 @@ public class FileUploadDownloadController {
 	@ResponseBody
 	public ResponseEntity<Resource> showImage(@PathVariable String name) throws IOException {
 		Path path = Paths.get(location + "/" + name);
-		String contentType = Files.probeContentType(path); //확장자 동적으로 리턴해주는 메소드?
-		Resource resource = new FileSystemResource(path);
+		String contentType = Files.probeContentType(path); 
+		Resource resource = new FileSystemResource(path); //InputStream과 다르게 파일을 직접 읽어들임
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(HttpHeaders.CONTENT_TYPE, contentType);
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
